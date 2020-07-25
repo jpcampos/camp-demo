@@ -64,7 +64,7 @@ java -jar -Dspring.profiles.active=test  target/camp-demo-0.0.1-SNAPSHOT.jar
 ```
 "Started CampDemoApplication in *.** seconds"
 ```
-The application is configured to use H2 in file database, therefore a new db file will be created when the application runs first and therefore the information (login information, chat messages etc) can be persisted.  
+The application is configured to use H2 in file database, therefore a new db file will be created when the application runs first and therefore the information (booking information)
 
 # Design
  
@@ -81,7 +81,7 @@ The application is configured to use H2 in file database, therefore a new db fil
  The spring boot application uses the following components for implementation:
  
  - Spring Controllers.
-    - Booking Controller. Handles all the chat related endpoints.
+    - Booking Controller. Handles all the camp demo related endpoints.
     - Camp Exception Handler Controller. The common handler for any exception that is directly targetted in the application.
  - Spring JPA 
     - Entities: 
@@ -133,7 +133,7 @@ The application is configured to use H2 in file database, therefore a new db fil
    Open the Project sidebar and navigate to the src/test/groovy folder
    Right click on the folder and choose the option:
    Run "All Tests"
-   The test suite will run until about 37 tests have been executed.
+   The test suite will run until about 135 tests have been executed.
    
    ## Continuous Integration Build
    
@@ -166,9 +166,9 @@ The application is configured to use H2 in file database, therefore a new db fil
    
    ## Authors
    
-    *** Juan Campos *** - *Initial work* - 
-     
-     ## Resources
+   *** Juan Campos *** - *Initial work* - 
+    
+   ## Resources
    
-     * Various web pages and resources to assist how Websockets and Springboot integrate.
+   * Various web pages and resources to assist with liquibase, maven build and docker deploy.
    
