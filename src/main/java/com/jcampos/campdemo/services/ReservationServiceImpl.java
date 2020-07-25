@@ -88,14 +88,30 @@ public class ReservationServiceImpl implements ReservationService{
         List<LocalDate> requestedDatesList = DateUtils
             .getDatesBetween(updatingBooking.getArrivalDate(), updatingBooking.getDepartureDate());
         if (openDates.get().containsAll(requestedDatesList)){
-            updatingBooking.setBookingStatus(BookingStatus.ACTIVE);
-            bookingRepository.save(updatingBooking);
+          Booking updatedBooking = mergeBookings(updatingBooking, existingBooking.get());
+          bookingRepository.save(updatedBooking);
+          return updatedBooking;
         } else {
           updatingBooking.setBookingStatus(BookingStatus.DATES_UNAVAILABLE);
         }
       }
     }
     return updatingBooking;
+  }
+
+  private Booking mergeBookings(Booking updatingBooking, Booking existingBooking) {
+    if (existingBooking.getArrivalDate().equals(updatingBooking.getArrivalDate()))
+      existingBooking.setArrivalDate(updatingBooking.getArrivalDate());
+    if (existingBooking.getDepartureDate().equals(updatingBooking.getDepartureDate()))
+      existingBooking.setDepartureDate(updatingBooking.getDepartureDate());
+    if (existingBooking.getEmail().equalsIgnoreCase(updatingBooking.getEmail()))
+      existingBooking.setEmail(updatingBooking.getEmail());
+    if (existingBooking.getFirstName().equalsIgnoreCase(updatingBooking.getFirstName()))
+      existingBooking.setFirstName(updatingBooking.getEmail());
+    if (existingBooking.getLastName().equalsIgnoreCase(updatingBooking.getLastName()))
+      existingBooking.setLastName(updatingBooking.getLastName());
+    existingBooking.setBookingStatus(BookingStatus.ACTIVE);
+    return existingBooking;
   }
 
   @Override

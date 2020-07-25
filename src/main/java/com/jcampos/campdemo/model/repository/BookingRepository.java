@@ -15,7 +15,6 @@ public interface BookingRepository extends JpaRepository<Booking,Long> {
 
   Booking findBookingByArrivalDate(LocalDate arrivalDate);
 
-
   boolean existsByFirstNameAndLastNameAndEmail(String firstName, String lastName, String email);
 
   List<Booking> findBookingsByFirstNameIgnoreCaseAndLastNameIgnoreCaseAndEmailIgnoreCase(String firstName, String lastName, String email);

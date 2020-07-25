@@ -46,8 +46,8 @@ class ReservationServiceSpecIT extends Specification {
                 firstName: "Mike",
                 lastName: "Doe",
                 email:"johndoe@email.com",
-                arrivalDate: LocalDate.now().plusDays(5),
-                departureDate: LocalDate.now().plusDays(7),
+                arrivalDate: LocalDate.now().plusDays(18),
+                departureDate: LocalDate.now().plusDays(19),
                 bookingStatus: BookingStatus.ACTIVE)
         def madeBooking = reservationService.makeReservation(booking)
         and:" The reservation id is used to cancel the reservation"

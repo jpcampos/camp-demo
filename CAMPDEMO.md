@@ -52,7 +52,7 @@ POST /campdemo/booking/
 |---|---|---|
 |**200**|OK|integer (int64)|
 |**201**|Created|No Content|
-|**401**|Unauthorized|No Content|
+|**400**|Bad Request|No Content|
 |**403**|Forbidden|No Content|
 |**404**|Not Found|No Content|
 
@@ -93,10 +93,9 @@ PUT /campdemo/booking/{id}
 |---|---|---|
 |**200**|OK|integer (int64)|
 |**201**|Created|No Content|
-|**401**|Unauthorized|No Content|
-|**403**|Forbidden|No Content|
+|**400**|Bad Request|No Content|
 |**404**|Not Found|No Content|
-
+|**417**|Expectation Failed|No Content|
 
 #### Consumes
 
@@ -132,9 +131,9 @@ DELETE /campdemo/booking/{id}
 |HTTP Code|Description|Schema|
 |---|---|---|
 |**200**|OK|No Content|
-|**204**|No Content|No Content|
-|**401**|Unauthorized|No Content|
-|**403**|Forbidden|No Content|
+|**400**|Bad Request|No Content|
+|**404**|Not Found|No Content|
+|**417**|Expectation Failed|No Content|
 
 
 #### Produces
@@ -167,7 +166,7 @@ GET /campdemo/bookingdates
 |HTTP Code|Description|Schema|
 |---|---|---|
 |**200**|OK|< [LocalDate](#localdate) > array|
-|**401**|Unauthorized|No Content|
+|**400**|Bad Request|No Content|
 |**403**|Forbidden|No Content|
 |**404**|Not Found|No Content|
 

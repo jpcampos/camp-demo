@@ -53,8 +53,8 @@ class BookingControllerSpecIT extends Specification {
                 firstName: "Jane",
                 lastName: "Doe",
                 email: "jdoe@email.com",
-                arrivalDate: saveArrivalDate.plusDays(10),
-                departureDate: saveDepartureDate.plusDays(10)
+                arrivalDate: LocalDate.now().plusDays(6),
+                departureDate: LocalDate.now().plusDays(7)
         )
         def secondJsonContent = new ObjectMapper().writeValueAsString(secondBookingDto)
         when: "Save the first two bookings 10 days apart"
@@ -63,9 +63,9 @@ class BookingControllerSpecIT extends Specification {
         and: "Updating first reservation 8 times. The 4th time the reservation update will run into having the same dates as second reservation"
         firstBookingDto.setId(Long.parseLong(firstResponse.contentAsString))
         List<MockHttpServletResponse> updateResponses = new ArrayList<>()
-        for (int i = 1; i < 8; i++) {
-            firstBookingDto.setArrivalDate(firstBookingDto.getArrivalDate().plusDays(i))
-            firstBookingDto.setDepartureDate(firstBookingDto.getDepartureDate().plusDays(i))
+        for (int i = 1; i < 11; i++) {
+            firstBookingDto.setArrivalDate(firstBookingDto.getArrivalDate().plusDays(1))
+            firstBookingDto.setDepartureDate(firstBookingDto.getDepartureDate().plusDays(1))
             firstJsonContent = new ObjectMapper().writeValueAsString(firstBookingDto)
             def updateResponse = mockMvc.perform((put(MsgKeys.CAMPDEMO + MsgKeys.BOOKING_RESOURCE + "/1")).contentType(MediaType.APPLICATION_JSON).content(firstJsonContent)).andReturn().getResponse()
             updateResponses.add(updateResponse)
@@ -74,17 +74,13 @@ class BookingControllerSpecIT extends Specification {
         firstResponse.getStatus() == HttpStatus.CREATED.value()
         secondResponse.getStatus() == HttpStatus.CREATED.value()
         and: "Check that 7 updates were done, the 4th update was rejected due to dates being unavailable"
-        updateResponses.size() == 7
-        int i = 1;
+        updateResponses.size() == 10
+        int i = 1
         for (MockHttpServletResponse update : updateResponses) {
             switch (i) {
-                case 4:
+                case 3:
                     assert update.status == HttpStatus.BAD_REQUEST.value()
                     assert update.contentAsString.contains("Dates are not available")
-                    break
-                case 7:
-                    assert update.status == HttpStatus.BAD_REQUEST.value()
-                    assert update.contentAsString.contains("Validation failed for argument")
                     break
                 default:
                     assert update.status == HttpStatus.OK.value()
