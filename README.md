@@ -66,6 +66,13 @@ java -jar -Dspring.profiles.active=test  target/camp-demo-0.0.1-SNAPSHOT.jar
 ```
 The application is configured to use H2 in file database, therefore a new db file will be created when the application runs first and therefore the information (booking information)
 
+  ## RESTAPI docs
+   The URLS provided are assumed to come from the root of the server application, for demo purposes [http://localhost:8080](http://localhost:8080)
+   The API documentation can also be seen via swagger 2. If the application is running locally, it can be accessed via [Swagger 2](http://localhost:8080/swagger-ui.html)
+   
+   ### How to use the application and Endpoints
+   All API documentation along with exampls with how to use it is here->  [REST API DOCS](CAMPDEMO.md)
+
 # Design
  
  ## Libraries used:
@@ -116,12 +123,7 @@ The application is configured to use H2 in file database, therefore a new db fil
     
   ```src/main/resources/db/changelog/changelog-master.xml```
   
-  ## RESTAPI docs
-   The URLS provided are assumed to come from the root of the server application, for demo purposes [http://localhost:8080](http://localhost:8080)
-   The API documentation can also be seen via swagger 2. If the application is running locally, it can be accessed via [Swagger 2](http://localhost:8080/swagger-ui.html)
-   
-   ### Open Endpoints
-   All API documentation is located here  [REST API DOCS](CAMPDEMO.md)
+
    
    #Unit Testing
    The code is unit tested via [Spock](http://www.spockframework.org) library. This library uses groovy language and has a BDD (Behaviour-Driven Development) style. The tests are under `src/groovy` folder and can be executed by IntelliJ. Integrations tests are out of scope for now but can be added if for example the broker is moved to Rabbit MQ or the DB is switched over to a non-memory db, deployed in Docker for example.
