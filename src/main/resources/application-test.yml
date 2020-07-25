@@ -1,0 +1,23 @@
+spring:
+  profiles: test
+  main:
+    banner-mode: off
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;
+    username: sa
+    password:
+  h2:
+    console:
+      enabled: true
+      settings:
+        web-allow-others: true
+      path: /H2
+  liquibase:
+    change-log: classpath:db/changelog/changelog-master.xml
+logging:
+  level:
+    root: ERROR
+    org.springframework.web: INFO
+    org.hibernate: ERROR
+    com.jcampos.campdemo: INFO

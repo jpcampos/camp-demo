@@ -1,0 +1,19 @@
+spring:
+  profiles: docker
+  main:
+    banner-mode: off
+  datasource:
+    url: jdbc:postgresql://postgres/campdemodb
+    username: postgres
+    password: admin
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+  liquibase:
+    change-log: classpath:db/changelog/changelog-master.xml
+logging:
+  level:
+    root: ERROR
+    org.springframework.web: INFO
+    org.hibernate: INFO
+    com.jcampos.campdemo: INFO

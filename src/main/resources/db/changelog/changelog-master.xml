@@ -1,0 +1,33 @@
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
+
+  <changeSet  id="1"  author="campdemo">
+    <validCheckSum>ANY</validCheckSum>
+    <createTable  tableName="booking">
+      <column  name="id"  type="int"  autoIncrement="true">
+        <constraints  primaryKey="true"  nullable="false"/>
+      </column>
+      <column  name="first_name"  type="varchar(50)">
+        <constraints  nullable="false"/>
+      </column>
+      <column  name="last_name"  type="varchar(50)">
+        <constraints  nullable="false"/>
+      </column>
+      <column  name="email"  type="varchar(50)">
+        <constraints  nullable="false"/>
+      </column>
+      <column  name="arrival_dt"  type="date">
+        <constraints nullable="false" unique="true"/>
+      </column>
+      <column  name="departure_dt"  type="date">
+        <constraints  nullable="false"/>
+      </column>
+      <column  name="status"  type="varchar(10)">
+        <constraints  nullable="false"/>
+      </column>
+    </createTable>
+  </changeSet>
+</databaseChangeLog>
