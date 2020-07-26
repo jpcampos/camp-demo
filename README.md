@@ -71,7 +71,7 @@ The application is configured to use H2 in file database, therefore a new db fil
    The API documentation can also be seen via swagger 2. If the application is running locally, it can be accessed via [Swagger 2](http://localhost:8080/swagger-ui.html)
    
    ### How to use the application and Endpoints
-   All API documentation along with exampls with how to use it is here->  [REST API DOCS](CAMPDEMO.md)
+   All API documentation along with examples with how to use it is here->  [REST API DOCS](CAMPDEMO.md)
 
 # Design
  
