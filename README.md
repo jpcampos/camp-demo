@@ -65,7 +65,7 @@ java -jar -Dspring.profiles.active=test  target/camp-demo-0.0.1-SNAPSHOT.jar
 ```
 "Started CampDemoApplication in *.** seconds"
 ```
-The application is configured to use H2 in file database, therefore a new db file will be created when the application runs first and therefore the information (booking information)
+The application is configured to use H2 in file database, therefore a new db file will be created when the application runs first and therefore the information (booking information) will remain persisted even if the application is brought down.
 
 ## Application running on cloud
 
@@ -133,7 +133,7 @@ For more details on the CI pipeline see [below](README.md#continuous-integration
 
    
    # Unit Testing
-   The code is unit tested via [Spock](http://www.spockframework.org) library. This library uses groovy language and has a BDD (Behaviour-Driven Development) style. The tests are under `src/groovy` folder and can be executed by IntelliJ. Integrations tests are out of scope for now but can be added if for example the broker is moved to Rabbit MQ or the DB is switched over to a non-memory db, deployed in Docker for example.
+   The code is unit tested via [Spock](http://www.spockframework.org) library. This library uses groovy language and has a BDD (Behaviour-Driven Development) style. The tests are under `src/groovy` folder and can be executed by IntelliJ. 
      
    ## Running the tests
    The tests are executed as part of the Maven build 
