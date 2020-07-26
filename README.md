@@ -70,8 +70,7 @@ The application is configured to use H2 in file database, therefore a new db fil
 ## Application running on cloud
 
 The application is build and deployed on a CI pipeline using github actions , running on a docker compose unit of springboot+postgres .
-The application REST API docs can be accessed here : [Cloud Reservation System](http://66.42.67.233:8090/swagger-ui.html)
-All the REST endpoints can be accesed from this location [Cloud REST endpoints](http://66.42.67.233:8090/) *NOTE* They are deployed on port 8090.
+The application REST API docs that detail the REST endpoints can be accessed here : [Cloud Reservation System](http://66.42.67.233:8090/swagger-ui.html)
 For more details on the CI pipeline see [below](README.md#continuous-integration-build).
   ## RESTAPI docs
    The URLS provided are assumed to come from the root of the server application, for demo purposes [http://localhost:8080](http://localhost:8080)
@@ -196,6 +195,8 @@ For more details on the CI pipeline see [below](README.md#continuous-integration
    The simulation is to run a single reservation creation, followed by 5,000 GET requests for open dates and 5,000 updates to the reservation created previously.
    The total throughput is 42.7/sec for the GET request and 42.6/sec for the PUT request.  Details on the table below with a test executed via JMETER.
    
+   <img width="1234" alt="Screen Shot 2020-07-26 at 11 49 44 AM" src="https://user-images.githubusercontent.com/876282/88485828-46216a00-cf36-11ea-9f0e-6f237c7c041b.png">
+
    
    ## Built With
    
