@@ -37,3 +37,15 @@ jobs:
         repository: jpcampos/bootprojects
         tag_with_ref: true
         tag_with_sha: true
+    - name: Deploy to Docker swarm
+      uses: wshihadeh/docker-deployment-action@v1
+      with:
+        remote_docker_host: root@66.42.67.233
+        ssh_private_key: ${{ secrets.VULTR_SSH_PRIVATE_KEY }}
+        ssh_public_key: ${{ secrets.VULTR_SSH_PUBLIC_KEY }}
+        deployment_mode: docker-swarm
+        copy_stack_file: true
+        deploy_path: /opt/bin
+        stack_file_name: docker-compose.yaml
+        keep_files: 5
+        args: up
