@@ -70,8 +70,7 @@ The application is configured to use H2 in file database, therefore a new db fil
 ## Application running on cloud
 
 The application is build and deployed on a CI pipeline using github actions , running on a docker compose unit of springboot+postgres .
-The application REST API docs can be accessed here : [Cloud Reservation System](http://66.42.67.233:8090/swagger-ui.html)
-All the REST endpoints can be accesed from this location [Cloud REST endpoints](http://66.42.67.233:8090/) *NOTE* They are deployed on port 8090.
+The application REST API docs that detail the REST endpoints can be accessed here : [Cloud Reservation System](http://66.42.67.233:8090/swagger-ui.html)
 For more details on the CI pipeline see [below](README.md#continuous-integration-build).
   ## RESTAPI docs
    The URLS provided are assumed to come from the root of the server application, for demo purposes [http://localhost:8080](http://localhost:8080)
