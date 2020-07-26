@@ -67,6 +67,12 @@ java -jar -Dspring.profiles.active=test  target/camp-demo-0.0.1-SNAPSHOT.jar
 ```
 The application is configured to use H2 in file database, therefore a new db file will be created when the application runs first and therefore the information (booking information)
 
+## Application running on cloud
+
+The application is build and deployed on a CI pipeline using github actions , running on a docker compose unit of springboot+postgres .
+The application REST API docs can be accessed here : [Cloud Reservation System](http://66.42.67.233:8090/swagger-ui.html)
+All the REST endpoints can be accesed from this location [Cloud REST endpoints](http://66.42.67.233:8090/) *NOTE* They are deployed on port 8090.
+For more details on the CI pipeline see [below](README.md#continuous-integration-build).
   ## RESTAPI docs
    The URLS provided are assumed to come from the root of the server application, for demo purposes [http://localhost:8080](http://localhost:8080)
    The API documentation can also be seen via swagger 2. If the application is running locally, it can be accessed via [Swagger 2](http://localhost:8080/swagger-ui.html)
@@ -152,10 +158,14 @@ The application is configured to use H2 in file database, therefore a new db fil
        - Merge to master
        - A pull request from a branch from master
        - A scheduled nightly build corresponding to 07:40 AM UTC time (around 7:40 AM Calgary time)
+       - An upload of the jar file `camp-demo-0.0.1-SNAPSHOT.jar`
+       - A docker build and push to the [Public Registry](https://hub.docker.com/r/jpcampos/bootprojects/tags)
    
    The source file for the CI build is located in the source project at:
    
    [Camp Demo Build yml file](https://github.com/jpcampos/camp-demo/blob/master/.github/workflows/maven.yml)
+   
+   The application is then deployed to a [vultr cloud server](http://66.42.67.233:8090/swagger-ui.html) via a chron job that performs a teardown, docker pull of latest build on registry and rebuild the application. *NOTE* The application will retain the persisted reservations in the system.
    
    ## Docker build
    
@@ -179,6 +189,12 @@ The application is configured to use H2 in file database, therefore a new db fil
    ```localhost:8090/campdemo/booking```
    
    The following section does some performance testing using this container as opposed to the in memory database 
+   
+   Performance testing:
+   
+   The following is a screenshot of the application running on the remote cloud server.
+   The simulation is to run a single reservation creation, followed by 5,000 GET requests for open dates and 5,000 updates to the reservation created previously.
+   The total throughput is 42.7/sec for the GET request and 42.6/sec for the PUT request.  Details on the table below with a test executed via JMETER.
    
    
    ## Built With
