@@ -43,8 +43,7 @@ jobs:
         remote_docker_host: root@66.42.67.233
         ssh_private_key: ${{ secrets.VULTR_SSH_PRIVATE_KEY }}
         ssh_public_key: ${{ secrets.VULTR_SSH_PUBLIC_KEY }}
-        deployment_mode: docker-swarm
-        copy_stack_file: true
+        deployment_mode: docker-compose
         deploy_path: /opt/bin
         stack_file_name: docker-compose.yaml
         keep_files: 5
