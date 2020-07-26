@@ -73,7 +73,7 @@ POST /campdemo/booking/
 
 #### Examples to make booking post request
 
-Sucessfull request
+Successful request
 
 <img width="1307" alt="Screen Shot 2020-07-25 at 6 17 26 PM" src="https://user-images.githubusercontent.com/876282/88468607-710eae00-cea3-11ea-910c-dc404e801215.png">
 
@@ -138,6 +138,11 @@ A successful update to a previous booking. Only dates have changed
 <img width="1314" alt="Screen Shot 2020-07-25 at 6 27 27 PM" src="https://user-images.githubusercontent.com/876282/88468704-90f2a180-cea4-11ea-89c4-e91a75173310.png">
 
 
+A request to update which runs into dates being unavailable due to a previous booking
+
+<img width="1276" alt="Screen Shot 2020-07-25 at 8 26 58 PM" src="https://user-images.githubusercontent.com/876282/88470088-8987c400-ceb5-11ea-8450-2274184b8f1f.png">
+
+
 <a name="deletebookingusingdelete"></a>
 ### deleteBooking
 ```
@@ -170,6 +175,13 @@ DELETE /campdemo/booking/{id}
 #### Tags
 
 * booking-controller
+
+#### Examples of REST operations
+
+This is a successful delete request for a delete operation with id "1"
+
+<img width="1303" alt="Screen Shot 2020-07-25 at 8 37 40 PM" src="https://user-images.githubusercontent.com/876282/88470187-b7213d00-ceb6-11ea-84b2-d202b32b166f.png">
+
 
 
 <a name="listavailabledatesusingget"></a>
