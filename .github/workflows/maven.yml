@@ -45,6 +45,6 @@ jobs:
         ssh_public_key: ${{ secrets.VULTR_SSH_PUBLIC_KEY }}
         deployment_mode: docker-compose
         deploy_path: /opt/bin
-        stack_file_name: docker-compose.yaml
+        stack_file_name: docker-compose.yml
         keep_files: 5
         args: up
