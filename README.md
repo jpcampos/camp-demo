@@ -2,6 +2,7 @@
 
 
 This is my implementation for the camp site reservation system.
+
 ## Functional Assumptions
 - Only 1 reservation per customer
 - A Customer may make a reservation only if he does not have a current reservation within the next 30 days.
@@ -12,7 +13,7 @@ This is my implementation for the camp site reservation system.
 - All services are REST endpoints.
 - The request/response mechanism is in JSON
 - The arrival date has a unique constraint in the db. This way it leaves the transactional boundary to save a reservation to the db, the source of truth. The departure date is left alone to leave the transactional boundary to only one value.
-
+- The application can run as just a springboot application from the command line or a spring boot application + postgres database in a docker compose deployment.
 ## Out of Scope
 - SSL.  
 - Security and Authentication 
@@ -155,6 +156,30 @@ The application is configured to use H2 in file database, therefore a new db fil
    The source file for the CI build is located in the source project at:
    
    [Camp Demo Build yml file](https://github.com/jpcampos/camp-demo/blob/master/.github/workflows/maven.yml)
+   
+   ## Docker build
+   
+   The application has an option to be build as a docker container.
+   To create a docker image, simply run the following command:  
+   ``` mvn clean install```  
+   
+   This will create a docker image. There is also a docker compose file called  
+   
+   ```docker-compose.yml```
+   
+   After running the install command, you can run the following
+   
+   ```docker-compose up```
+   
+   This will execute a docker image composition, there are two images:  
+   ```campdb-docker``` A postgres database. The database can be accessed on localhost:5433/campdemodb with username: postgres password:admin
+   
+   The image will use the application-docker.yml file in the source code which is pointing to a different port, on 8090:
+   
+   ```localhost:8090/campdemo/booking```
+   
+   The following section does some performance testing using this container as opposed to the in memory database 
+   
    
    ## Built With
    

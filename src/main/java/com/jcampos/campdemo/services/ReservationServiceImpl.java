@@ -100,15 +100,15 @@ public class ReservationServiceImpl implements ReservationService{
   }
 
   private Booking mergeBookings(Booking updatingBooking, Booking existingBooking) {
-    if (existingBooking.getArrivalDate().equals(updatingBooking.getArrivalDate()))
+    if (!existingBooking.getArrivalDate().equals(updatingBooking.getArrivalDate()))
       existingBooking.setArrivalDate(updatingBooking.getArrivalDate());
-    if (existingBooking.getDepartureDate().equals(updatingBooking.getDepartureDate()))
+    if (!existingBooking.getDepartureDate().equals(updatingBooking.getDepartureDate()))
       existingBooking.setDepartureDate(updatingBooking.getDepartureDate());
-    if (existingBooking.getEmail().equalsIgnoreCase(updatingBooking.getEmail()))
+    if (!existingBooking.getEmail().equalsIgnoreCase(updatingBooking.getEmail()))
       existingBooking.setEmail(updatingBooking.getEmail());
-    if (existingBooking.getFirstName().equalsIgnoreCase(updatingBooking.getFirstName()))
-      existingBooking.setFirstName(updatingBooking.getEmail());
-    if (existingBooking.getLastName().equalsIgnoreCase(updatingBooking.getLastName()))
+    if (!existingBooking.getFirstName().equalsIgnoreCase(updatingBooking.getFirstName()))
+      existingBooking.setFirstName(updatingBooking.getFirstName());
+    if (!existingBooking.getLastName().equalsIgnoreCase(updatingBooking.getLastName()))
       existingBooking.setLastName(updatingBooking.getLastName());
     existingBooking.setBookingStatus(BookingStatus.ACTIVE);
     return existingBooking;

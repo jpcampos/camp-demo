@@ -21,7 +21,7 @@ public interface BookingRepository extends JpaRepository<Booking,Long> {
 
   @Query("SELECT b from Booking b where b.arrivalDate >= :beginDate AND b.departureDate < :endDate" +
          " OR (b.departureDate >= :beginDate AND b.departureDate <= :endDate)" +
-         " OR (:beginDate = :endDate AND b.arrivalDate <= :beginDate AND b.departureDate >= :beginDate)" +
+         " OR (b.arrivalDate <= :beginDate AND b.departureDate >= :beginDate)" +
          " AND b.bookingStatus = :bookingStatus"
   )
   List<Booking> findActiveBookingsBetweenDates(@Param("beginDate") LocalDate beginDate,@Param("endDate")LocalDate endDate,
@@ -29,7 +29,7 @@ public interface BookingRepository extends JpaRepository<Booking,Long> {
 
   @Query("SELECT b from Booking b where b.id <>:bookingId AND (b.arrivalDate >= :beginDate AND b.departureDate < :endDate" +
       " OR (b.departureDate >= :beginDate AND b.departureDate <= :endDate)" +
-      " OR (:beginDate = :endDate AND b.arrivalDate <= :beginDate AND b.departureDate >= :beginDate)" +
+      " OR (b.arrivalDate <= :beginDate AND b.departureDate >= :beginDate)" +
       " AND b.bookingStatus = :bookingStatus)"
   )
   List<Booking> findActiveBookingsBetweenDatesMinusExistingBooking(@Param("beginDate") LocalDate beginDate,@Param("endDate")LocalDate endDate,

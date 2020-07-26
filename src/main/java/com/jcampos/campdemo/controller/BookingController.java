@@ -18,6 +18,7 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Valid;
 import javax.validation.Validation;
 import javax.validation.Validator;
+import javax.validation.constraints.NotBlank;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -54,7 +55,7 @@ public class BookingController {
   }
 
   @GetMapping(value= MsgKeys.BOOKING_DATES_RESOURCE, produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<List<LocalDate>> listAvailableDates(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)LocalDate arrivalDate, @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)LocalDate departureDate) {
+  public ResponseEntity<List<LocalDate>> listAvailableDates(@RequestParam @NotBlank @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)LocalDate arrivalDate, @RequestParam @NotBlank @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)LocalDate departureDate) {
     Set<ConstraintViolation<SearchDates>> constraintViolations = checkConstraintValidationExceptions(
         arrivalDate, departureDate);
     if (!constraintViolations.isEmpty()){
