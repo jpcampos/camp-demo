@@ -71,6 +71,26 @@ POST /campdemo/booking/
 
 * booking-controller
 
+#### Examples to make booking post request
+
+Sucessfull request
+
+<img width="1307" alt="Screen Shot 2020-07-25 at 6 17 26 PM" src="https://user-images.githubusercontent.com/876282/88468607-710eae00-cea3-11ea-910c-dc404e801215.png">
+
+
+Immediate request with the same dates returns error because dates are unavailable
+
+<img width="1297" alt="Screen Shot 2020-07-25 at 6 20 53 PM" src="https://user-images.githubusercontent.com/876282/88468679-4d983300-cea4-11ea-9f2c-5c14c270135b.png">
+
+Request with incorrect date that is more than 3 days of available reservation time
+
+<img width="1573" alt="Screen Shot 2020-07-25 at 6 22 24 PM" src="https://user-images.githubusercontent.com/876282/88468645-cf3b9100-cea3-11ea-8cd4-c28d6367c75a.png">
+
+Valid dates request but guest already has reservation in the same period. A guest is considered to be the same if they have the same first name, last name and email
+
+<img width="1307" alt="Screen Shot 2020-07-25 at 6 23 41 PM" src="https://user-images.githubusercontent.com/876282/88468660-20e41b80-cea4-11ea-97ad-ba18b6f5be6c.png">
+
+
 
 <a name="updatebookingusingput"></a>
 ### updateBooking
@@ -110,6 +130,12 @@ PUT /campdemo/booking/{id}
 #### Tags
 
 * booking-controller
+
+#### Examples of update operation
+
+A successful update to a previous booking. Only dates have changed
+
+<img width="1314" alt="Screen Shot 2020-07-25 at 6 27 27 PM" src="https://user-images.githubusercontent.com/876282/88468704-90f2a180-cea4-11ea-89c4-e91a75173310.png">
 
 
 <a name="deletebookingusingdelete"></a>
@@ -169,6 +195,20 @@ GET /campdemo/bookingdates
 |**400**|Bad Request|No Content|
 |**403**|Forbidden|No Content|
 |**404**|Not Found|No Content|
+
+#### Examples
+Example of a succesful GET request
+<img width="1010" alt="Screen Shot 2020-07-25 at 5 37 16 PM" src="https://user-images.githubusercontent.com/876282/88468219-84b71600-ce9d-11ea-8599-9575d166345d.png">
+
+
+This is a sample of the response
+
+<img width="1459" alt="Screen Shot 2020-07-25 at 5 38 29 PM" src="https://user-images.githubusercontent.com/876282/88468229-af08d380-ce9d-11ea-8973-636670c3e442.png">
+
+
+Example of a bad request with departure date more than 30 days into the future
+<img width="1314" alt="Screen Shot 2020-07-25 at 5 50 31 PM" src="https://user-images.githubusercontent.com/876282/88468350-60f4cf80-ce9f-11ea-8889-912903520ddc.png">
+
 
 
 #### Produces
