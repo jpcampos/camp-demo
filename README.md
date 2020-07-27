@@ -28,6 +28,12 @@ Java 8,  Maven 3.6 and a REST client (examples are shown using POSTMAN).
 Intellij
 ```
 
+## Application running on cloud
+
+The application is build and deployed on a CI pipeline using github actions , running on a docker compose unit of springboot+postgres .
+The application REST API docs that detail the REST endpoints can be accessed here : [Cloud Reservation System](http://66.42.67.233:8090/swagger-ui.html)
+For more details on the CI pipeline see [below](README.md#continuous-integration-build).
+
 ### (Optional) Installing project on IntelliJ from the provided zip file
 
 * Unzip the provided camp-demo.zip file into a clean folder.
@@ -52,10 +58,10 @@ mvn clean package
 camp-demo-0.0.1-SNAPSHOT.jar
 ```
 
-## Running the Application
+## Running the Application Locally
 * To run the application, type in from a command line window in the root folder 
 the following command (The '/' character on the path may need to be changed):  
-*NOTE* The test argument MUST be added so the application can run in memory. Otherwise the default profile is set to use a postgres db which is set up in a docker container. To run the application with Docker compose please see <HERE>HERE
+*NOTE* The test argument MUST be added so the application can run in memory. Otherwise the default profile is set to use a postgres db which is set up in a docker container.
 ```
 java -jar -Dspring.profiles.active=test  target/camp-demo-0.0.1-SNAPSHOT.jar
 ```
@@ -67,17 +73,17 @@ java -jar -Dspring.profiles.active=test  target/camp-demo-0.0.1-SNAPSHOT.jar
 ```
 The application is configured to use H2 in file database, therefore a new db file will be created when the application runs first and therefore the information (booking information) will remain persisted even if the application is brought down.
 
-## Application running on cloud
+ To run the application with Docker compose please see [here](README.md#docker-build)
+ 
+ 
+### How to use the application and Endpoints
+All API documentation along with examples with how to use it is here->  [REST API DOCS](CAMPDEMO.md)
 
-The application is build and deployed on a CI pipeline using github actions , running on a docker compose unit of springboot+postgres .
-The application REST API docs that detail the REST endpoints can be accessed here : [Cloud Reservation System](http://66.42.67.233:8090/swagger-ui.html)
-For more details on the CI pipeline see [below](README.md#continuous-integration-build).
-  ## RESTAPI docs
-   The URLS provided are assumed to come from the root of the server application, for demo purposes [http://localhost:8080](http://localhost:8080)
-   The API documentation can also be seen via swagger 2. If the application is running locally, it can be accessed via [Swagger 2](http://localhost:8080/swagger-ui.html)
-   
-   ### How to use the application and Endpoints
-   All API documentation along with examples with how to use it is here->  [REST API DOCS](CAMPDEMO.md)
+## RESTAPI docs
+  The URLS provided are assumed to come from the root of the server application, for demo purposes [http://localhost:8080](http://localhost:8080)
+  The API documentation can also be seen via swagger 2. If the application is running locally, it can be accessed via [Swagger 2](http://localhost:8080/swagger-ui.html)
+  
+
 
 # Design
  
@@ -107,7 +113,7 @@ For more details on the CI pipeline see [below](README.md#continuous-integration
     - Date Service. Handles service calculations and collections to be used by the reservation service.
  - Spring AOP
     - An aspect `CampLoggingAspect` is used in tandem with logging to log every entry and exit from methods, as well as any exception thrown.
- -Spring Localization
+ - Spring Localization
     - Resource bundles are used to switch from english to french via resource bundles. 
     
   ## DB model

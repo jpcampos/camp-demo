@@ -17,7 +17,7 @@ Api Documentation
 
 
 ### URI scheme
-*Host* : localhost:8080  
+*Host* : http://66.42.67.233:8090/  
 *BasePath* : /
 
 
