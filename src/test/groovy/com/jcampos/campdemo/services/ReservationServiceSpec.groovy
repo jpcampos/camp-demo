@@ -51,7 +51,7 @@ class ReservationServiceSpec extends Specification {
     }
 
     @Unroll
-    def "Test update reservation sends back status #expectedStatus when guest has a reservation already = #guestExists"() {
+    def "Test update reservation sends back status #expectedStatus when guest has a reservation already "() {
         given:"set up the mocks"
         dateService.getOpenDatesForExistingBooking(*_) >> Optional.of(openDates)
         def bookingToMake = new Booking(id:1L,firstName: "John", lastName: "Doe", email:"jdoe@email.com",arrivalDate: bookingDates.get(0),departureDate: bookingDates.get(1))

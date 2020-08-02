@@ -111,7 +111,7 @@ class BookingControllerSpec extends Specification {
         def jsonContent = new ObjectMapper().writeValueAsString(bookingDto)
         when:"The make reservation method is called"
         reservationService.makeReservation(*_) >> new Booking(id: null,bookingStatus: BookingStatus.CANCELLED)
-        def response = mockMvc.perform((post(MsgKeys.CAMPDEMO + MsgKeys.BOOKING_RESOURCE)).contentType(MediaType.APPLICATION_JSON).content(jsonContent)).andReturn().getResponse()
+        def response = mockMvc.perform((post(MsgKeys.CAMPDEMO + MsgKeys.POST_BOOKING)).contentType(MediaType.APPLICATION_JSON).content(jsonContent)).andReturn().getResponse()
         then: "Status is Expectation failed"
         HttpStatus.BAD_REQUEST.value() == response.status
     }
@@ -131,7 +131,7 @@ class BookingControllerSpec extends Specification {
         def jsonContent = new ObjectMapper().writeValueAsString(bookingDto)
         reservationService.makeReservation(bookingDto) >> new Booking(id: 1)
         expect: "Status is 400 and the response contains incorrect arrival date'"
-        def response = mockMvc.perform((post(MsgKeys.CAMPDEMO + MsgKeys.BOOKING_RESOURCE)).contentType(MediaType.APPLICATION_JSON).content(jsonContent)).andReturn().getResponse()
+        def response = mockMvc.perform((post(MsgKeys.CAMPDEMO + MsgKeys.POST_BOOKING)).contentType(MediaType.APPLICATION_JSON).content(jsonContent)).andReturn().getResponse()
         response.contentAsString.contains(ResourceBundle.getBundle("messages").getString(messageKey))
         expectedStatus == response.status
         where: "Values for json request and expected responses"
@@ -157,7 +157,7 @@ class BookingControllerSpec extends Specification {
         )
         def jsonContent = new ObjectMapper().writeValueAsString(bookingDto)
         reservationService.makeReservation(_ as Booking) >> new Booking(id: 1)
-        def response = mockMvc.perform((post(MsgKeys.CAMPDEMO + MsgKeys.BOOKING_RESOURCE)).contentType(MediaType.APPLICATION_JSON).content(jsonContent)).andReturn().getResponse()
+        def response = mockMvc.perform((post(MsgKeys.CAMPDEMO + MsgKeys.POST_BOOKING)).contentType(MediaType.APPLICATION_JSON).content(jsonContent)).andReturn().getResponse()
         expect: "Status is 201 (Created) and the response contains the booking id'"
         response.contentAsString.contains("1")
         response.status == HttpStatus.CREATED.value()

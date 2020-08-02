@@ -4,11 +4,11 @@ import com.jcampos.campdemo.exception.DatesAlreadyBookedException;
 import com.jcampos.campdemo.exception.GetDatesException;
 import com.jcampos.campdemo.exception.UserAlreadyHasBookingException;
 import com.jcampos.campdemo.model.dto.BookingDto;
+import com.jcampos.campdemo.model.dto.SearchDates;
 import com.jcampos.campdemo.model.entity.Booking;
 import com.jcampos.campdemo.model.enums.BookingStatus;
 import com.jcampos.campdemo.services.ReservationService;
 import com.jcampos.campdemo.util.MsgKeys;
-import com.jcampos.campdemo.model.dto.SearchDates;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
@@ -38,7 +38,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 @RequestMapping()
@@ -83,7 +82,7 @@ public class BookingController {
     return validator.validate( searchDates );
   }
 
-  @PostMapping(value =MsgKeys.CAMPDEMO+ MsgKeys.BOOKING_RESOURCE, produces = MediaType.APPLICATION_JSON_VALUE)
+  @PostMapping(value =MsgKeys.CAMPDEMO+ MsgKeys.POST_BOOKING, produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Long> makeBooking(@Valid @RequestBody BookingDto bookingDto){
     ModelMapper modelMapper = new ModelMapper();
     Booking entityBooking = modelMapper.map(bookingDto, Booking.class);

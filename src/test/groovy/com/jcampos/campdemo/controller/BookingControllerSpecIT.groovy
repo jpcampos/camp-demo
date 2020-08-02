@@ -58,8 +58,8 @@ class BookingControllerSpecIT extends Specification {
         )
         def secondJsonContent = new ObjectMapper().writeValueAsString(secondBookingDto)
         when: "Save the first two bookings 10 days apart"
-        def firstResponse = mockMvc.perform((post(MsgKeys.CAMPDEMO + MsgKeys.BOOKING_RESOURCE)).contentType(MediaType.APPLICATION_JSON).content(firstJsonContent)).andReturn().getResponse()
-        def secondResponse = mockMvc.perform((post(MsgKeys.CAMPDEMO + MsgKeys.BOOKING_RESOURCE)).contentType(MediaType.APPLICATION_JSON).content(secondJsonContent)).andReturn().getResponse()
+        def firstResponse = mockMvc.perform((post(MsgKeys.CAMPDEMO + MsgKeys.POST_BOOKING)).contentType(MediaType.APPLICATION_JSON).content(firstJsonContent)).andReturn().getResponse()
+        def secondResponse = mockMvc.perform((post(MsgKeys.CAMPDEMO + MsgKeys.POST_BOOKING)).contentType(MediaType.APPLICATION_JSON).content(secondJsonContent)).andReturn().getResponse()
         and: "Updating first reservation 8 times. The 4th time the reservation update will run into having the same dates as second reservation"
         firstBookingDto.setId(Long.parseLong(firstResponse.contentAsString))
         List<MockHttpServletResponse> updateResponses = new ArrayList<>()
@@ -112,8 +112,8 @@ class BookingControllerSpecIT extends Specification {
         )
         def secondJsonContent = new ObjectMapper().writeValueAsString(secondBookingDto)
         when: "Save the first two bookings 10 days apart"
-        def firstResponse = mockMvc.perform((post(MsgKeys.CAMPDEMO + MsgKeys.BOOKING_RESOURCE)).contentType(MediaType.APPLICATION_JSON).content(firstJsonContent)).andReturn().getResponse()
-        def secondResponse = mockMvc.perform((post(MsgKeys.CAMPDEMO + MsgKeys.BOOKING_RESOURCE)).contentType(MediaType.APPLICATION_JSON).content(secondJsonContent)).andReturn().getResponse()
+        def firstResponse = mockMvc.perform((post(MsgKeys.CAMPDEMO + MsgKeys.POST_BOOKING)).contentType(MediaType.APPLICATION_JSON).content(firstJsonContent)).andReturn().getResponse()
+        def secondResponse = mockMvc.perform((post(MsgKeys.CAMPDEMO + MsgKeys.POST_BOOKING)).contentType(MediaType.APPLICATION_JSON).content(secondJsonContent)).andReturn().getResponse()
         then: "The second response return a guest already exists message"
         firstResponse.status == HttpStatus.CREATED.value()
         secondResponse.status == HttpStatus.BAD_REQUEST.value()
