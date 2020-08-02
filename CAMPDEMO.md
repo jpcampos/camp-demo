@@ -95,7 +95,7 @@ Valid dates request but guest already has reservation in the same period. A gues
 <a name="updatebookingusingput"></a>
 ### updateBooking
 ```
-PUT /campdemo/booking/{id}
+PUT /campdemo/bookings/{id}
 ```
 
 
@@ -146,7 +146,7 @@ A request to update which runs into dates being unavailable due to a previous bo
 <a name="deletebookingusingdelete"></a>
 ### deleteBooking
 ```
-DELETE /campdemo/booking/{id}
+DELETE /campdemo/bookings/{id}
 ```
 
 

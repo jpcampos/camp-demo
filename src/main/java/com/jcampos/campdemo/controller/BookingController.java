@@ -9,11 +9,13 @@ import com.jcampos.campdemo.model.enums.BookingStatus;
 import com.jcampos.campdemo.services.ReservationService;
 import com.jcampos.campdemo.util.MsgKeys;
 import com.jcampos.campdemo.model.dto.SearchDates;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolation;
 import javax.validation.Valid;
 import javax.validation.Validation;
@@ -36,9 +38,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 @RestController
-@RequestMapping(MsgKeys.CAMPDEMO)
+@RequestMapping()
 public class BookingController {
 
 
@@ -54,7 +57,13 @@ public class BookingController {
     this.messageSource = messageSource;;
   }
 
-  @GetMapping(value= MsgKeys.BOOKING_DATES_RESOURCE, produces = MediaType.APPLICATION_JSON_VALUE)
+
+  @RequestMapping(MsgKeys.ROOT)
+  void handleFoo(HttpServletResponse response) throws IOException {
+    response.sendRedirect(MsgKeys.SWAGGER_UI);
+  }
+
+  @GetMapping(value= MsgKeys.CAMPDEMO + MsgKeys.BOOKING_DATES_RESOURCE, produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<List<LocalDate>> listAvailableDates(@RequestParam @NotBlank @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)LocalDate arrivalDate, @RequestParam @NotBlank @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)LocalDate departureDate) {
     Set<ConstraintViolation<SearchDates>> constraintViolations = checkConstraintValidationExceptions(
         arrivalDate, departureDate);
@@ -74,7 +83,7 @@ public class BookingController {
     return validator.validate( searchDates );
   }
 
-  @PostMapping(value = MsgKeys.BOOKING_RESOURCE, produces = MediaType.APPLICATION_JSON_VALUE)
+  @PostMapping(value =MsgKeys.CAMPDEMO+ MsgKeys.BOOKING_RESOURCE, produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Long> makeBooking(@Valid @RequestBody BookingDto bookingDto){
     ModelMapper modelMapper = new ModelMapper();
     Booking entityBooking = modelMapper.map(bookingDto, Booking.class);
@@ -88,7 +97,7 @@ public class BookingController {
     return  new ResponseEntity<>(entityBooking.getId(), HttpStatus.BAD_REQUEST);
   }
 
-  @PutMapping(value = MsgKeys.UPDATE_CANCEL_BOOKING_RESOURCE, produces = MediaType.APPLICATION_JSON_VALUE)
+  @PutMapping(value = MsgKeys.CAMPDEMO+MsgKeys.UPDATE_CANCEL_BOOKING_RESOURCE, produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Long> updateBooking(@Valid @RequestBody BookingDto bookingDto,@PathVariable Long id){
     ModelMapper modelMapper = new ModelMapper();
     Booking entityBooking = modelMapper.map(bookingDto, Booking.class);
@@ -101,7 +110,7 @@ public class BookingController {
     return new ResponseEntity<>(entityBooking.getId(),HttpStatus.EXPECTATION_FAILED);
   }
 
-  @DeleteMapping(value = MsgKeys.UPDATE_CANCEL_BOOKING_RESOURCE, produces = MediaType.APPLICATION_JSON_VALUE)
+  @DeleteMapping(value = MsgKeys.CAMPDEMO+MsgKeys.UPDATE_CANCEL_BOOKING_RESOURCE, produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Void> deleteBooking(@PathVariable Long id) {
     boolean isCancelled = reservationService.cancelReservation(id);
     if (!isCancelled) {
