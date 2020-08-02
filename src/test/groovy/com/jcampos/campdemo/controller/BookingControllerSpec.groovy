@@ -254,7 +254,7 @@ class BookingControllerSpec extends Specification {
         given:"A cancel reservation request returns status #expectedStatus when the service response to delete is #serviceResponse"
         reservationService.cancelReservation(*_) >> serviceResponse
         when:"When the request is made"
-        def response = mockMvc.perform((delete(MsgKeys.CAMPDEMO + MsgKeys.BOOKING_RESOURCE + "1"))).andReturn().getResponse()
+        def response = mockMvc.perform((delete(MsgKeys.CAMPDEMO + MsgKeys.BOOKING_RESOURCE + "/1"))).andReturn().getResponse()
         then: "Status is as expected'"
         response.status.equals(expectedStatus)
         where:""

@@ -103,7 +103,7 @@ public class BookingController {
     Booking entityBooking = modelMapper.map(bookingDto, Booking.class);
     entityBooking = reservationService.updateReservation(entityBooking,id);
     if (BookingStatus.ACTIVE == entityBooking.getBookingStatus()){
-      return new ResponseEntity<>(entityBooking.getId(),HttpStatus.OK);
+      return new ResponseEntity<>(entityBooking.getId(),HttpStatus.ACCEPTED);
     } else {
       checkReservationExceptions(entityBooking);
     }

@@ -14,7 +14,7 @@ public class MsgKeys {
   public static final String DEPARTURE_DATE_INCORRECT = "DEPARTURE_DATE_INCORRECT";
 
   public static final String ADATE_BEFORE_EQUAL_DDATE = "ADATE_BEFORE_EQUAL_DDATE";
-  public static final String BOOKING_RESOURCE = "/booking";
+  public static final String BOOKING_RESOURCE = "/bookings";
   public static final String INCORRECT_PERIOD = "INCORRECT_PERIOD";
   public static final String GUEST_ALREADY_HAS_BOOKING = "GUEST_ALREADY_HAS_BOOKING";
   public static final String DATES_ALREADY_BOOKED = "DATES_ALREADY_BOOKED";

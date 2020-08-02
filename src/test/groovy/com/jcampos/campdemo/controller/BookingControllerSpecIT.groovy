@@ -83,7 +83,7 @@ class BookingControllerSpecIT extends Specification {
                     assert update.contentAsString.contains("Dates are not available")
                     break
                 default:
-                    assert update.status == HttpStatus.OK.value()
+                    assert update.status == HttpStatus.ACCEPTED.value()
 
             }
             i++
