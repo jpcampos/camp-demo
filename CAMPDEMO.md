@@ -166,12 +166,13 @@ PUT /campdemo/bookings/{id}
 
 A successful update to a previous booking. Only dates have changed
 
-<img width="1314" alt="Screen Shot 2020-07-25 at 6 27 27 PM" src="https://user-images.githubusercontent.com/876282/88468704-90f2a180-cea4-11ea-89c4-e91a75173310.png">
+<img width="1289" alt="Screen Shot 2020-08-02 at 11 26 45 AM" src="https://user-images.githubusercontent.com/876282/89128923-38c82a80-d4b6-11ea-9766-f65cfe0609df.png">
 
 
 A request to update which runs into dates being unavailable due to a previous booking
 
-<img width="1276" alt="Screen Shot 2020-07-25 at 8 26 58 PM" src="https://user-images.githubusercontent.com/876282/88470088-8987c400-ceb5-11ea-8450-2274184b8f1f.png">
+<img width="1298" alt="Screen Shot 2020-08-02 at 11 45 39 AM" src="https://user-images.githubusercontent.com/876282/89128938-4f6e8180-d4b6-11ea-850f-6c28da7d836e.png">
+
 
 
 <a name="deletebookingusingdelete"></a>
@@ -207,6 +208,12 @@ DELETE /campdemo/bookings/{id}
 #### Tags
 
 * booking-controller
+
+Example of successful delete operation:
+
+<img width="1309" alt="Screen Shot 2020-08-02 at 11 46 46 AM" src="https://user-images.githubusercontent.com/876282/89128894-0d454000-d4b6-11ea-84b9-64d0213d9e06.png">
+
+
 
 #### Examples of REST operations
 
