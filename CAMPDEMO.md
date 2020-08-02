@@ -23,9 +23,39 @@ Api Documentation
 
 ### Tags
 
-* basic-error-controller : Basic Error Controller
 * booking-controller : Booking Controller
 
+<a name="paths"></a>
+## Paths
+
+<a name="rootget"></a>
+### getRoot
+```
+GET /
+```
+
+
+#### Parameters
+None
+
+#### Responses
+
+|HTTP Code|Description|Schema|
+|---|---|---|
+|**302**|Moved Elsewhere|No Content|
+|**400**|Bad Request|No Content|
+|**403**|Forbidden|No Content|
+|**404**|Not Found|No Content|
+
+
+#### Consumes
+
+* `HTTP Get`
+
+
+#### Produces
+
+* `HTTP Redirect to swagger-ui`
 
 
 
@@ -113,6 +143,7 @@ PUT /campdemo/bookings/{id}
 |---|---|---|
 |**200**|OK|integer (int64)|
 |**201**|Created|No Content|
+|**202**|Accepted|No Content|
 |**400**|Bad Request|No Content|
 |**404**|Not Found|No Content|
 |**417**|Expectation Failed|No Content|
@@ -162,6 +193,7 @@ DELETE /campdemo/bookings/{id}
 |HTTP Code|Description|Schema|
 |---|---|---|
 |**200**|OK|No Content|
+|**202**|Accepted|No Content|
 |**400**|Bad Request|No Content|
 |**404**|Not Found|No Content|
 |**417**|Expectation Failed|No Content|
@@ -231,222 +263,6 @@ Example of a bad request with departure date more than 30 days into the future
 #### Tags
 
 * booking-controller
-
-
-<a name="errorhtmlusingpost"></a>
-### errorHtml
-```
-POST /error
-```
-
-
-#### Responses
-
-|HTTP Code|Description|Schema|
-|---|---|---|
-|**200**|OK|[ModelAndView](#modelandview)|
-|**201**|Created|No Content|
-|**401**|Unauthorized|No Content|
-|**403**|Forbidden|No Content|
-|**404**|Not Found|No Content|
-
-
-#### Consumes
-
-* `application/json`
-
-
-#### Produces
-
-* `text/html`
-
-
-#### Tags
-
-* basic-error-controller
-
-
-<a name="errorhtmlusingget"></a>
-### errorHtml
-```
-GET /error
-```
-
-
-#### Responses
-
-|HTTP Code|Description|Schema|
-|---|---|---|
-|**200**|OK|[ModelAndView](#modelandview)|
-|**401**|Unauthorized|No Content|
-|**403**|Forbidden|No Content|
-|**404**|Not Found|No Content|
-
-
-#### Produces
-
-* `text/html`
-
-
-#### Tags
-
-* basic-error-controller
-
-
-<a name="errorhtmlusingput"></a>
-### errorHtml
-```
-PUT /error
-```
-
-
-#### Responses
-
-|HTTP Code|Description|Schema|
-|---|---|---|
-|**200**|OK|[ModelAndView](#modelandview)|
-|**201**|Created|No Content|
-|**401**|Unauthorized|No Content|
-|**403**|Forbidden|No Content|
-|**404**|Not Found|No Content|
-
-
-#### Consumes
-
-* `application/json`
-
-
-#### Produces
-
-* `text/html`
-
-
-#### Tags
-
-* basic-error-controller
-
-
-<a name="errorhtmlusingdelete"></a>
-### errorHtml
-```
-DELETE /error
-```
-
-
-#### Responses
-
-|HTTP Code|Description|Schema|
-|---|---|---|
-|**200**|OK|[ModelAndView](#modelandview)|
-|**204**|No Content|No Content|
-|**401**|Unauthorized|No Content|
-|**403**|Forbidden|No Content|
-
-
-#### Produces
-
-* `text/html`
-
-
-#### Tags
-
-* basic-error-controller
-
-
-<a name="errorhtmlusingpatch"></a>
-### errorHtml
-```
-PATCH /error
-```
-
-
-#### Responses
-
-|HTTP Code|Description|Schema|
-|---|---|---|
-|**200**|OK|[ModelAndView](#modelandview)|
-|**204**|No Content|No Content|
-|**401**|Unauthorized|No Content|
-|**403**|Forbidden|No Content|
-
-
-#### Consumes
-
-* `application/json`
-
-
-#### Produces
-
-* `text/html`
-
-
-#### Tags
-
-* basic-error-controller
-
-
-<a name="errorhtmlusinghead"></a>
-### errorHtml
-```
-HEAD /error
-```
-
-
-#### Responses
-
-|HTTP Code|Description|Schema|
-|---|---|---|
-|**200**|OK|[ModelAndView](#modelandview)|
-|**204**|No Content|No Content|
-|**401**|Unauthorized|No Content|
-|**403**|Forbidden|No Content|
-
-
-#### Consumes
-
-* `application/json`
-
-
-#### Produces
-
-* `text/html`
-
-
-#### Tags
-
-* basic-error-controller
-
-
-<a name="errorhtmlusingoptions"></a>
-### errorHtml
-```
-OPTIONS /error
-```
-
-
-#### Responses
-
-|HTTP Code|Description|Schema|
-|---|---|---|
-|**200**|OK|[ModelAndView](#modelandview)|
-|**204**|No Content|No Content|
-|**401**|Unauthorized|No Content|
-|**403**|Forbidden|No Content|
-
-
-#### Consumes
-
-* `application/json`
-
-
-#### Produces
-
-* `text/html`
-
-
-#### Tags
-
-* basic-error-controller
 
 
 

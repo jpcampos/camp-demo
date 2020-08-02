@@ -13,7 +13,7 @@ This is my implementation for the camp site reservation system.
 - All services are REST endpoints.
 - The request/response mechanism is in JSON
 - The arrival date has a unique constraint in the db. This way it leaves the transactional boundary to save a reservation to the db, the source of truth. The departure date is left alone to leave the transactional boundary to only one value.
-- The application can run as just a springboot application from the command line or a spring boot application + postgres database in a docker compose deployment.
+- The application can run as just a springboot application from the command line or a spring boot application + postgres database in a docker compose deployment. The springboot containers can be spun into multiple containers. The db however is left in a single container to ensure consistency of data.
 ## Out of Scope
 - SSL.  
 - Security and Authentication 
@@ -61,7 +61,21 @@ camp-demo-0.0.1-SNAPSHOT.jar
 ## Running the Application Locally
 * To run the application, type in from a command line window in the root folder 
 the following command (The '/' character on the path may need to be changed):  
-*NOTE* The test argument MUST be added so the application can run in memory. Otherwise the default profile is set to use a postgres db which is set up in a docker container.
+```
+java -jar  target/camp-demo-0.0.1-SNAPSHOT.jar
+```
+This will fire up the application with the default profile. This default profile is set up to persist the information in an H2 *LOCAL FILE* database. This means that if the application is stopped the data will be available on restart from the file. 
+
+The application is configured to use H2 in file database, therefore a new db file will be created when the application runs first and therefore the information (booking information) will remain persisted even if the application is brought down.
+
+The application will then create two H2 files, testdb.mv.db testdb.trace.db in the root folder for the user. These can be removed manually later.
+
+
+### Running with test profile 
+
+*NOTE* The test argument MUST be added so the application can run in memory *INCLUDING* the database. Otherwise the default profile is used which will create a local file for the db.
+
+To run in test mode:
 ```
 java -jar -Dspring.profiles.active=test  target/camp-demo-0.0.1-SNAPSHOT.jar
 ```
@@ -71,7 +85,12 @@ java -jar -Dspring.profiles.active=test  target/camp-demo-0.0.1-SNAPSHOT.jar
 ```
 "Started CampDemoApplication in *.** seconds"
 ```
-The application is configured to use H2 in file database, therefore a new db file will be created when the application runs first and therefore the information (booking information) will remain persisted even if the application is brought down.
+
+The test mode is also used to run the unit tests locally. 
+
+To see data persisted, the application can run with the default profile or if docker is installed in the host machine using the docker build and profile.
+
+### Docker build and run
 
  To run the application with Docker compose please see [here](README.md#docker-build)
  
@@ -170,28 +189,66 @@ All API documentation along with examples with how to use it is here->  [REST AP
    
    [Camp Demo Build yml file](https://github.com/jpcampos/camp-demo/blob/master/.github/workflows/maven.yml)
    
-   The application is then deployed to a [vultr cloud server](http://66.42.67.233:8090/swagger-ui.html) via a chron job that performs a teardown, docker pull of latest build on registry and rebuild the application. *NOTE* The application will retain the persisted reservations in the system.
+   The application is then deployed to a [vultr cloud server](http://66.42.67.233:8090/) via a chron job that performs a teardown, docker pull of latest build on registry and rebuild the application. *NOTE* The application will retain the persisted reservations in the system.
    
    ## Docker build
    
    The application has an option to be build as a docker container.
-   To create a docker image, simply run the following command:  
+   To create a docker image `camp-demo` , simply run the following command:  
+   
    ``` mvn clean install```  
    
-   This will create a docker image. There is also a docker compose file called  
+   This will create the local docker image `camp-demo' . There is also a docker compose file called  
    
    ```docker-compose.yml```
    
-   After running the install command, you can run the following
+   After running the install command, you can run the following command from the same location the `docker-compose.yml` file is located.
    
    ```docker-compose up```
    
-   This will execute a docker image composition, there are two images:  
-   ```campdb-docker``` A postgres database. The database can be accessed on localhost:5433/campdemodb with username: postgres password:admin
+   This will execute a docker image composition, there are three services:
+     
+   ```campdb-docker``` A postgres database. The database can be accessed on `localhost:5433/campdemodb` with username: `postgres` and  password `admin`
+   
+   ```campdemoapp``` The spring boot application. It uses the postgres database for persistence.
+   
+   ```nginx``` Load balancer using round robbin in case the user decides to scale the multiple spring boot app containers horizontally.
    
    The image will use the application-docker.yml file in the source code which is pointing to a different port, on 8090:
    
    ```localhost:8090/campdemo/booking```
+   
+   The containers can be stopped using ```docker-compose stop```
+   
+   ### Scaling spring boot campdemoapp service horizontally
+   
+   The application can also run using multiple containers for the spring boot app. The persistence system however will still be a bottle neck since the spring boot apps need to rely on it for source of data. One possible improvement could to add a in memory cache for the list of available dates however the implementation of such a coordinated cache in a cluster of spring boot applications is out of scope for this version of the application. The scaling of spring boot apps is just left then as a capability demonstration.
+   
+   To spin up more then one container the spring boot applications must be stopped with:
+   
+   ```docker-compose stop```
+   
+   To spin 3 docker containers use the following instruction:
+   
+   ```docker-compose up --scale campdemoapp=3 -d```
+   
+   The screen should then show the following output for the spring boot containers
+   
+   ```
+   Starting camp-demo_campdemoapp_1 ... done
+   Creating camp-demo_campdemoapp_2 ... done
+   Creating camp-demo_campdemoapp_3 ... done
+   ```
+
+  These are runnning in detached mode. Type the following in the command line to see the logs:
+  
+  ```docker-compose logs campdemoapp -f```
+  
+  This will tail the logs of the application, the screen should print out the `Started CampDemoApplication` for the 3 containers mentioned above.
+  
+  *NOTE* The cloud application at `66.42.67.233:8090` is running 3 containers at the moment. 
+   
+   ### Performance Testing
    
    The following section does some performance testing using this container as opposed to the in memory database 
    

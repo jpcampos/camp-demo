@@ -57,8 +57,8 @@ public class BookingController {
   }
 
 
-  @RequestMapping(MsgKeys.ROOT)
-  void handleFoo(HttpServletResponse response) throws IOException {
+  @GetMapping(MsgKeys.ROOT)
+  void redirectRoot(HttpServletResponse response) throws IOException {
     response.sendRedirect(MsgKeys.SWAGGER_UI);
   }
 
