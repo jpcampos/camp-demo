@@ -13,7 +13,7 @@ spring:
     change-log: classpath:db/changelog/changelog-master.xml
 logging:
   level:
-    root: ERROR
-    org.springframework.web: INFO
-    org.hibernate: INFO
-    com.jcampos.campdemo: INFO
+    root: DEBUG
+    org.springframework.web: DEBUG
+    org.hibernate: DEBUG
+    com.jcampos.campdemo: DEBUG
