@@ -70,6 +70,16 @@ The application is configured to use H2 in file database, therefore a new db fil
 
 The application will then create two H2 files, testdb.mv.db testdb.trace.db in the root folder for the user. These can be removed manually later.
 
+To access the application, type in a local browser `localhost:8080`. 
+The port for when the application runs locally in default mode is `8080`.
+
+The browser will display the API documentation. The user can navigate to the `BookingController` link to view the REST API for the application.  
+
+<img width="1480" alt="Screen Shot 2020-08-02 at 12 02 10 PM" src="https://user-images.githubusercontent.com/876282/89129129-061f3180-d4b8-11ea-85b4-495479ba9ef1.png">
+
+
+The user can then view the examples to construct REST operation in a REST client such as postman.
+
 
 ### Running with test profile 
 
